@@ -1,5 +1,11 @@
 {
   "name": "api-do-tiago",
   "version": "1.0.0",
-  "private": true
+  "type": "module",
+  "scripts": {
+    "start": "node api/generateKey.js"
+  },
+  "dependencies": {
+    "uuid": "^9.0.0"
+  }
 }

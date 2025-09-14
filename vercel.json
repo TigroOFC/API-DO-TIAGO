@@ -1,11 +1,9 @@
 {
   "version": 2,
   "builds": [
-    { "src": "index.html", "use": "@vercel/static" },
-    { "src": "api/tiago.js", "use": "@vercel/node" }
+    { "src": "api/generateKey.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/api/tiago", "dest": "/api/tiago.js" },
-    { "src": "/", "dest": "/index.html" }
+    { "src": "/api/generateKey", "dest": "/api/generateKey.js" }
   ]
 }
