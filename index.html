@@ -4,44 +4,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>API do Tiago</title>
-  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/7/7e/Node.js_logo_2015.svg">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/60/60740.png">
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f3f3f3;
-      text-align: center;
-      padding: 50px;
+      background: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
+    h1 { color: #333; }
     button {
       padding: 10px 20px;
-      background-color: #007BFF;
-      border: none;
-      color: white;
       font-size: 16px;
+      background: #007BFF;
+      color: #fff;
+      border: none;
       border-radius: 5px;
       cursor: pointer;
     }
-    #resultado {
+    #key {
       margin-top: 20px;
+      font-size: 18px;
+      color: #007BFF;
+      word-wrap: break-word;
+      max-width: 90%;
     }
   </style>
 </head>
 <body>
-  <h1>Bem-vindo à API do Tiago</h1>
-  <p>Clique para testar a API:</p>
-  <button onclick="testarAPI()">Testar API</button>
-  <div id="resultado"></div>
+  <h1>Gerador de API Key do Tiago</h1>
+  <button onclick="gerarKey()">Gerar API Key</button>
+  <p id="key"></p>
 
   <script>
-    async function testarAPI() {
-      try {
-        // Chama a API do Tiago com a key
-        const res = await fetch('/api/tiago?key=a750d04c-58d9-4f00-88d5-19da791d4e19');
-        const data = await res.json();
-        document.getElementById('resultado').innerText = JSON.stringify(data, null, 2);
-      } catch (err) {
-        document.getElementById('resultado').innerText = 'Erro ao chamar API: ' + err;
-      }
+    async function gerarKey() {
+      const res = await fetch('/api/tiago');
+      const data = await res.json();
+      document.getElementById('key').textContent = "Sua API Key: " + data.apiKey;
     }
   </script>
 </body>

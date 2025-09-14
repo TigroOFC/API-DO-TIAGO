@@ -1,14 +1,11 @@
-// /api/tiago.js
 export default function handler(req, res) {
-  // Aqui validamos a chave enviada pelo cliente
-  const { key } = req.query;
+  // Gera uma chave aleatória (UUID)
+  const apiKey = cryptoRandomKey();
 
-  if (key !== "a750d04c-58d9-4f00-88d5-19da791d4e19") {
-    return res.status(403).json({ error: "API key inválida" });
-  }
+  res.status(200).json({ apiKey });
+}
 
-  // Resposta da sua API
-  res.status(200).json({
-    message: "Olá! Esta é a API do Tiago funcionando com sucesso 🚀"
-  });
+function cryptoRandomKey() {
+  // 32 caracteres aleatórios hexadecimais
+  return [...Array(32)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
 }
