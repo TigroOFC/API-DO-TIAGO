@@ -1,50 +1,48 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>API do Tiago</title>
-<style>
-  body { font-family: Arial; background:#1e1e1e; color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; }
-  input, textarea { padding:10px; margin:5px; width:400px; border-radius:5px; border:none; }
-  button { padding:10px 20px; margin:10px; border:none; background:#007acc; color:white; border-radius:5px; cursor:pointer; }
-  #reply { margin-top:20px; white-space:pre-wrap; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API do Tiago</title>
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/7/7e/Node.js_logo_2015.svg">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f3f3;
+      text-align: center;
+      padding: 50px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #resultado {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
+  <h1>Bem-vindo à API do Tiago</h1>
+  <p>Clique para testar a API:</p>
+  <button onclick="testarAPI()">Testar API</button>
+  <div id="resultado"></div>
 
-<h1>API do Tiago</h1>
-<button id="generateKey">Gerar Chave API</button>
-<input type="text" id="apiKey" placeholder="Sua chave aparecerá aqui" readonly />
-<textarea id="message" placeholder="Digite sua mensagem"></textarea>
-<button id="sendMessage">Enviar Mensagem</button>
-<div id="reply"></div>
-
-<script>
-document.getElementById("generateKey").addEventListener("click", async () => {
-  const res = await fetch("/api/generate-key");
-  const data = await res.json();
-  document.getElementById("apiKey").value = data.key;
-});
-
-document.getElementById("sendMessage").addEventListener("click", async () => {
-  const key = document.getElementById("apiKey").value;
-  const message = document.getElementById("message").value;
-  if(!key) return alert("Gere uma chave primeiro!");
-  if(!message) return alert("Digite uma mensagem!");
-
-  const res = await fetch("/api/tiago", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-key": key
-    },
-    body: JSON.stringify({ message })
-  });
-  const data = await res.json();
-  document.getElementById("reply").innerText = data.reply || data.error;
-});
-</script>
-
+  <script>
+    async function testarAPI() {
+      try {
+        // Chama a API do Tiago com a key
+        const res = await fetch('/api/tiago?key=a750d04c-58d9-4f00-88d5-19da791d4e19');
+        const data = await res.json();
+        document.getElementById('resultado').innerText = JSON.stringify(data, null, 2);
+      } catch (err) {
+        document.getElementById('resultado').innerText = 'Erro ao chamar API: ' + err;
+      }
+    }
+  </script>
 </body>
 </html>
