@@ -4,6 +4,7 @@
     { "src": "api/generateKey.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/api/generateKey", "dest": "/api/generateKey.js" }
+    { "src": "/api/generateKey", "dest": "/api/generateKey.js" },
+    { "src": "/", "dest": "/frontend/index.html" }
   ]
 }
